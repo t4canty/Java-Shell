@@ -54,8 +54,7 @@ public class Main {
 				
 			case "cat":
 				try {
-				File input = new File(choice.get(1));
-				fileIO.cat(input);
+				fileIO.cat(cDir, choice.get(1));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
