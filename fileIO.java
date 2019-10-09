@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,8 +32,19 @@ public class fileIO {
 	public static void rm(File input) {
 		System.out.println("not implemented");
 	}
-	public static void cat(File input) {
-		System.out.println("not implemented");
+	public static void cat(Path cDir, String input) {
+	    if(input.substring(0, 1) != "\\" && input.indexOf("\\") == -1){
+	    	input = cDir.toString() + "\\" + input;
+	    }
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+	    	   String line = null;
+	    	   while ((line = br.readLine()) != null) {
+	    	       System.out.println(line);
+	    	   }
+	    	}catch(Exception e){
+	    		   e.printStackTrace();
+	    	   }
 	}
 	public static void echo(File input, String text) {
 		System.out.println("not implemented");
@@ -39,7 +52,6 @@ public class fileIO {
 	public static Path cd(Path cDir, String dir) {
 			if(dir.equals("..")) {
 				Path currentDir = Paths.get(cDir.toString(), "..\\");
-				//System.out.println(currentDir.toAbsolutePath().normalize());
 				return currentDir.normalize();
 			} else if(dir.equals(".")) {
 				return cDir.normalize();
