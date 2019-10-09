@@ -83,8 +83,10 @@ public class Main {
 				break;
 			case "owo":
 				System.out.println("OWO");
+				break;
 			case "uwu":
 				System.out.println("uwu");
+				break;
 			case "cd":
 				try {
 				cDir = fileIO.cd(cDir.normalize(), choice.get(1));
