@@ -92,7 +92,13 @@ public class Main {
 				break;
 			case "cd":
 				try {
-				cDir = fileIO.cd(cDir.normalize(), choice.get(1));
+					String choice2 = choice.get(1);
+					if(choice.size() > 1){
+						for(int i =2; i < choice.size(); i++){
+							choice2 += " " + choice.get(i);
+						}
+					}
+					cDir = fileIO.cd(cDir.normalize(), choice2);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
