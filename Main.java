@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 public class Main {
 	public static void main(String args[]) throws IOException {
-		Path cDir = Paths.get(".");
+		Path cDir = Paths.get(".").toAbsolutePath();
 		System.out.print("Welcome to java shell. Written by Screencap. \n Type 'help' for more. \n");
 		while(true) {
-			System.out.print(cDir.toAbsolutePath().normalize().toString() + ">");
+			System.out.print(cDir.normalize().toString() + ">");
 			Scanner in = new Scanner(System.in);
 			List<String> choice = new ArrayList<String>();
 			String userinput = in.nextLine();
@@ -54,7 +54,13 @@ public class Main {
 				
 			case "cat":
 				try {
-				fileIO.cat(cDir, choice.get(1));
+					String choice2 = choice.get(1);
+					if(choice.size() > 1){
+						for(int i =2; i < choice.size(); i++){
+							choice2 += " " + choice.get(i);
+						}
+					}
+					fileIO.cat(cDir, choice2);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -82,7 +88,7 @@ public class Main {
 					break;
 				}
 			case "rshell":
-				Exec.rshell();
+				//Exec.rshell();
 				break;
 			case "owo":
 				System.out.println("OWO");
@@ -98,6 +104,7 @@ public class Main {
 							choice2 += " " + choice.get(i);
 						}
 					}
+					
 					cDir = fileIO.cd(cDir.normalize(), choice2);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
