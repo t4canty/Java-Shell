@@ -22,12 +22,12 @@ public class Main {
 				System.out.print("Help: \nls - list directory\ncp - copies file\nrm - deletes file\ncat - reads file\necho - writes string to file\nexec - executes a string to powershell\nrshell - starts reverse shell\ncd - changes directory\nexit - exits\nhelp - displayes help\n");
 				break;
 			case "ls":
-				fileIO.ls(cDir);
+				FileIO.ls(cDir);
 				break;
 			case "cp":
 				try {
 				File input = new File(choice.get(1));
-				fileIO.cp(input, choice.get(2));
+				FileIO.cp(input, choice.get(2));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -36,7 +36,7 @@ public class Main {
 			case "mv":
 				try {
 				File input = new File(choice.get(1));
-				fileIO.mv(input, choice.get(2));
+				FileIO.mv(input, choice.get(2));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -45,7 +45,7 @@ public class Main {
 			case "rm":
 				try {
 				File input = new File(choice.get(1));
-				fileIO.rm(input);
+				FileIO.rm(input);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -60,7 +60,7 @@ public class Main {
 							choice2 += " " + choice.get(i);
 						}
 					}
-					fileIO.cat(cDir, choice2);
+					FileIO.cat(cDir, choice2);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -69,7 +69,7 @@ public class Main {
 			case "echo":
 				try {
 				File input = new File(choice.get(1));
-				fileIO.echo(input, choice.get(2));
+				FileIO.echo(input, choice.get(2));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -77,18 +77,24 @@ public class Main {
 				}
 			case "exec":
 				try {
-					String[] cmd = new String[choice.size()-1];
-					for(int i = 0; i < choice.size()-1; i++) {
-						cmd[i] = choice.get(i+1);
+					String[] choice2 = new String[choice.size()];
+					if(choice.size() > 1){
+						for(int i = 1; i < choice.size(); i++){
+							choice2[i] += " " + choice.get(i);
+						}
 					}
-				Exec.exec(cmd);
+				Exec.exec(choice2);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
 					break;
 				}
 			case "rshell":
-				//Exec.rshell();
+				String[] cmd = new String[choice.size()-1];
+				for(int i = 0; i < choice.size()-1; i++) {
+					cmd[i] = choice.get(i+1);
+				}
+				Exec.rshell(cmd);
 				break;
 			case "owo":
 				System.out.println("OWO");
@@ -105,7 +111,7 @@ public class Main {
 						}
 					}
 					
-					cDir = fileIO.cd(cDir.normalize(), choice2);
+					cDir = FileIO.cd(cDir.normalize(), choice2);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
