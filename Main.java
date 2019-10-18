@@ -77,13 +77,11 @@ public class Main {
 				}
 			case "exec":
 				try {
-					String[] choice2 = new String[choice.size()];
-					if(choice.size() > 1){
-						for(int i = 1; i < choice.size(); i++){
-							choice2[i] += " " + choice.get(i);
-						}
+					String[] cmd = new String[choice.size()-1];
+					for(int i = 0; i < choice.size()-1; i++) {
+						cmd[i] = choice.get(i+1);
 					}
-				Exec.exec(choice2);
+				Exec.exec(cmd);
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
