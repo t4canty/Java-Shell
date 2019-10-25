@@ -13,8 +13,6 @@ Completed:
 
 -linux support
 
-Todo:
-
 -Reverse shell over tcp
 
 -copy/move/delete files
