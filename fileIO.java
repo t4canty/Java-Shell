@@ -22,18 +22,32 @@ public class fileIO {
 			e.printStackTrace();
 		}
 	}
-	public static void cp(File input, String output) {
-		System.out.println("not implemented");
-
+	public static void cp(String input, String output) {
+		try {
+			Files.copy(Paths.get(input), Paths.get(output));
+		} catch (Exception e) {
+			System.out.println("Error in copy");
+			e.printStackTrace();
+		}
 	}
-	public static void mv(File input, String output) {
-		System.out.println("not implemented");
+	public static void mv(String input, String output) {
 		cp(input, output);
-		rm(input);
-
+		rm(input, "");
 	}
-	public static void rm(File input) {
-		System.out.println("not implemented");
+	public static void rm(String input, String input2) {
+		try {
+			if(input2.equals("-r")) {
+				Files.walk(Paths.get(input))
+			     .sorted(Comparator.reverseOrder())
+			     .map(Path::toFile)
+			     .forEach(File::delete);
+			}else {
+				Files.deleteIfExists(Paths.get(input));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Problem in rm");
+		}
 	}
 	public static void cat(Path cDir, String input) {
 		if(os.indexOf("win") >= 0){
