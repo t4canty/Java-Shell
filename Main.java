@@ -26,8 +26,7 @@ public class Main {
 				break;
 			case "cp":
 				try {
-				File input = new File(choice.get(1));
-				FileIO.cp(input, choice.get(2));
+				fileIO.cp(choice.get(1), choice.get(2));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -35,8 +34,7 @@ public class Main {
 				}
 			case "mv":
 				try {
-				File input = new File(choice.get(1));
-				FileIO.mv(input, choice.get(2));
+				fileIO.mv(choice.get(1), choice.get(2));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
@@ -44,8 +42,7 @@ public class Main {
 				}
 			case "rm":
 				try {
-				File input = new File(choice.get(1));
-				FileIO.rm(input);
+				fileIO.rm(choice.get(1), choice.get(2));
 				break;
 				}catch (Exception arrayIndexOutOfBoundsException) {
 					System.out.println("Error: Missing arguments");
